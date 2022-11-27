@@ -1,8 +1,8 @@
 .profile__add-btn{
   margin-top: 35px;
   padding: 0;
-  max-height: 50px;
-  max-width: 150px;
+  height: 50px;
+  width: 150px;
   justify-self: end;
   display: flex;
   justify-content: center;
@@ -10,18 +10,24 @@
   background-color: transparent;
   border: 2px solid #FFFFFF;
   border-radius: 2px;
+  background-image: url(../../../images/profile/add-btn.svg);
+  background-position: center center;
+  background-size: 22px 22px;
+  background-repeat: no-repeat;
 }
 
 @media screen and (max-width: 768px){
   .profile__add-btn{
     justify-self: center;
     max-width: 200px;
+    background-size: 22px;
   }
 }
 
 @media screen and (max-width:448px){
   .profile__add-btn{
     margin-top: 36px;
-    max-width: 282px;
+    max-width: none;
+    width: 100%;
   }
 }
