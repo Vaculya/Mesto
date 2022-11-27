@@ -1,8 +1,15 @@
 .page{
   margin: 0 auto;
+  padding-bottom: 60px;
   position: relative;
   background-color: #000;
   color: #fff;
   font-family: 'Inter', Arial, Helvetica, sans-serif;
   text-rendering: optimizeLegibility;
+}
+
+@media screen and (max-width: 448px){
+  .page{
+    padding-bottom: 36px;
+  }
 }
