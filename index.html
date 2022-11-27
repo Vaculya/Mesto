@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Место</title>
   <link rel="stylesheet" href="pages/index.css">
 </head>
 <body class="page">
@@ -24,6 +24,77 @@
         <img class="profile__add-img" src="images/profile/add-btn.svg" alt="Добваить">
       </button>
     </section>
+    <section class="elements elements_position_center">
+      <div class="elements__item">
+        <figure class="elements__figure">
+          <img class="elements__img" src="images/elements/places/bolooms.jpg" alt="Фото места">
+          <figcaption class="elements__caption">
+            <p class="elements__name">Карачаевск</p>
+            <img class="elements__like elements__like_color" src="images/elements/like.svg" alt="Нравится">
+          </figcaption>
+        </figure>
+      </div>
+      <div class="elements__item">
+        <figure class="elements__figure">
+          <img class="elements__img" src="images/elements/places/desert.jpg" alt="Фото места">
+          <figcaption class="elements__caption">
+            <p class="elements__name">Пустыня выживания</p>
+            <img class="elements__like elements__like_color" src="images/elements/like.svg" alt="Нравится">
+          </figcaption>
+        </figure>
+      </div>
+      <div class="elements__item">
+        <figure class="elements__figure">
+          <img class="elements__img" src="images/elements/places/island.jpg" alt="Фото места">
+          <figcaption class="elements__caption">
+            <p class="elements__name">Домбай</p>
+            <img class="elements__like elements__like_color" src="images/elements/like.svg" alt="Нравится">
+          </figcaption>
+        </figure>
+      </div>
+      <div class="elements__item">
+        <figure class="elements__figure">
+          <img class="elements__img" src="images/elements/places/moon.jpg" alt="Фото места">
+          <figcaption class="elements__caption">
+            <p class="elements__name">Лунная гора</p>
+            <img class="elements__like elements__like_color" src="images/elements/like.svg" alt="Нравится">
+          </figcaption>
+        </figure>
+      </div>
+      <div class="elements__item">
+        <figure class="elements__figure">
+          <img class="elements__img" src="images/elements/places/stars.jpg" alt="Фото места">
+          <figcaption class="elements__caption">
+            <p class="elements__name">Порт звёздный</p>
+            <img class="elements__like elements__like_color" src="images/elements/like.svg" alt="Нравится">
+          </figcaption>
+        </figure>
+      </div>
+      <div class="elements__item">
+        <figure class="elements__figure">
+          <img class="elements__img" src="images/elements/places/tree.jpg" alt="Фото места">
+          <figcaption class="elements__caption">
+            <p class="elements__name">Река Волга</p>
+            <img class="elements__like elements__like_color" src="images/elements/like.svg" alt="Нравится">
+          </figcaption>
+        </figure>
+      </div>
+    </section>
   </main>
+  <footer class="footer">
+    <p class="footer__text">© 2020 Mesto Russia</p>
+  </footer>
+  <section class="popup">
+    <div class="popup__container">
+      <img class="popup__close" src="images/popup/close.svg" alt="Закрыть">
+      <form class="popup__form" action="submit">
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <input class="popup__name popup__input" type="text" placeholder="Введите свое имя и фамилию">
+        <input class="popup__about popup__input" type="text" placeholder="О себе">
+        <button class="popup__save" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </section>
+  <script src="profile.js"></script>
 </body>
 </html>
