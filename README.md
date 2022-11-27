@@ -12,4 +12,4 @@
   3. БЭМ
   4. Адаптация страницы
 
-Ссылка на страницу: https://vaculya.github.io/Vaculya-mesto.github.io/
+Ссылка на страницу: https://vaculya.github.io/Mesto/
