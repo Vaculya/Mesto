@@ -1,0 +1,28 @@
+.profile__edit-btn{
+  padding: 0;
+  margin-top: 15px;
+  max-width: 24px;
+  max-height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #fff;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px){
+  .profile__edit-btn{
+    margin-top: 12px;
+    max-width: 20px;
+    max-height: 20px;
+  }
+}
+
+@media screen and (max-width: 448px){
+  .profile__edit-btn{
+    margin-top: 8px;
+    max-width: 18px;
+    max-height: 18px;
+  }
+}
