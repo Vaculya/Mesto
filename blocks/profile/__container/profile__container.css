@@ -3,6 +3,12 @@
   align-items: center;
 }
 
+@media screen and (max-width: 768px){
+  .profile__container{
+    align-items: baseline;
+  }
+}
+
 @media screen and (max-width: 448px){
   .profile__container{
     margin-left: 28px;
