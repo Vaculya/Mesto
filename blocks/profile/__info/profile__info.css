@@ -1,18 +1,11 @@
 .profile__info{
   margin: 22px 0 0 0;
   max-width: 336px;
-  display: grid;
-  grid-template-columns: repeat(2,max-content);
-  grid-template-rows: max-content 1fr;
-  column-gap: 18px;
-  row-gap: 16px;
 }
 
 @media screen and (max-width: 768px){
   .profile__info{
     margin-top: 26px;
-    max-width: inherit;
-    column-gap: 10px;
-    row-gap: 14px;
+    max-width: 100%;
   }
 }
