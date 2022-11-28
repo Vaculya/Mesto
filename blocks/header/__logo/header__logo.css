@@ -1,19 +1,24 @@
 .header__logo{
-  max-height: 33px;
-  padding-bottom: 41px;
+  height: 33px;
+  width: 142px;
+  background-image: url(../../../images/header/header_logo.svg);
+  background-size: cover;
+  background-color: transparent;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 
 
 @media screen and (max-width: 768px){
   .header__logo{
-    max-height: 27px;
-    padding-bottom: 36px;
+    height: 27px;
+    width: 117px;
   }
 }
 
 @media screen and (max-width: 448px){
   .header__logo{
-    max-height: 24.4px;
-    padding-bottom: 31px;
+    height: 24.4px;
+    width: 104px;
   }
 }

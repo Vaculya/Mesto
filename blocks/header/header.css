@@ -1,7 +1,7 @@
 .header{
   max-width: 880px;
   margin: 0 auto;
-  padding: 45px 0 0 35px;
+  padding: 45px 0 41px 0;
   position: relative;
 }
 
@@ -15,9 +15,22 @@
   background-color: rgba(84, 84, 84, .7);
 }
 
-@media screen and (max-width:768px){
+@media screen and (max-width: 960px){
   .header{
-    padding-top: 28px;
     padding-left: 27px;
   }
 }
+
+@media screen and (max-width:768px){
+  .header{
+    padding-top: 28px;
+    padding-bottom: 36px;
+  }
+}
+
+@media screen and (max-width: 448px){
+  .header{
+    padding-bottom: 31px;
+  }
+}
+
