@@ -3,4 +3,7 @@
   margin: 0;
   background: #FFFFFF;
   border-radius: 10px;
+  display: grid;
+  grid-template-columns: 282px;
+  grid-template-rows: 282px 1fr;
 }
