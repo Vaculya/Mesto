@@ -23,7 +23,7 @@
       <button class="profile__add-btn" type="button"></button>
     </section>
     <section class="elements">
-      <div class="elements__item">
+      <!-- <div class="elements__item">
         <img class="elements__img" src="./images/elements/places/photo1.png" alt="Заброшенная церковь в Карачаевске">
         <div class="elements__caption">
           <h2 class="elements__name">Карачаевск</h2>
@@ -64,7 +64,7 @@
           <h2 class="elements__name">Карачаево-Черкаск</h2>
           <button class="elements__like" type="button"></button>
         </div>
-      </div>
+      </div> -->
     </section>
   </main>
   <footer class="footer">
@@ -81,6 +81,17 @@
       </form>
     </div>
   </div>
+
+  <template id="element-template">
+    <div class="elements__item">
+      <img class="elements__img" src="./images/elements/places/photo1.png" alt="Заброшенная церковь в Карачаевске">
+      <div class="elements__caption">
+        <h2 class="elements__name">Карачаевск</h2>
+        <button class="elements__like" type="button"></button>
+      </div>
+    </div>
+  </template>
+
   <script src="./scripts/index.js"></script>
 </body>
 </html>
