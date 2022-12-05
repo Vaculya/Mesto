@@ -70,11 +70,11 @@
   <footer class="footer">
     <p class="footer__text">© 2020 Mesto Russia</p>
   </footer>
-  <div class="popup">
+  <div class="popup popup_type_edit">
     <div class="popup__container">
       <button class="popup__close" type="button"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form class="popup__form" name="popup__profile" action="submit">
+      <form class="popup__form popup__form_type_edit" name="popup__profile" action="submit">
         <input class="popup__input popup__input_info_name" name="popup__name" type="text" placeholder="Введите свое имя и фамилию">
         <input class="popup__input popup__input_info_about" name="popup__about" type="text" placeholder="О себе">
         <button class="popup__save" type="submit">Сохранить</button>
@@ -82,11 +82,23 @@
     </div>
   </div>
 
+  <div class="popup popup_type_add">
+    <div class="popup__container">
+      <button class="popup__close popup__close_btn-add" type="button"></button>
+      <h2 class="popup__title">Новое место</h2>
+      <form class="popup__form popup__form_type_add" name="popup__place" action="submit">
+        <input class="popup__input popup__input_place_name" required name="popup__name" type="text" placeholder="Название">
+        <input class="popup__input popup__input_img_link" required name="popup__about" type="text" placeholder="Ссылка на картинку">
+        <button class="popup__save" type="submit">Создать</button>
+      </form>
+    </div>
+  </div>
+
   <template id="element-template">
     <div class="elements__item">
-      <img class="elements__img" src="./images/elements/places/photo1.png" alt="Заброшенная церковь в Карачаевске">
+      <img class="elements__img" src="" alt="">
       <div class="elements__caption">
-        <h2 class="elements__name">Карачаевск</h2>
+        <h2 class="elements__name"></h2>
         <button class="elements__like" type="button"></button>
       </div>
     </div>
