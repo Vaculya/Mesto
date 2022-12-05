@@ -13,9 +13,11 @@ let buttonEditFormOpen = document.querySelector(".profile__edit-btn"),
     closeBtnAddPopup = document.querySelector('.popup__close_btn-add'),
     formAdd = document.querySelector('.popup__form_type_add'), // форма добавления места
     placeName = document.querySelector('.popup__input_place_name'), // Название места в попап
-    imgLink = document.querySelector('.popup__input_img_link'); //Ссылка на картинку в попап
+    imgLink = document.querySelector('.popup__input_img_link'), //Ссылка на картинку в попап
 
-    likeCard = document.querySelectorAll('.elements__like');
+    likeCard = document.querySelectorAll('.elements__like'),
+
+    deleteCard = document.querySelectorAll('.elements__delete');
 
 function openPopupEdit (){
   popupEdit.classList.add("popup_opened");
@@ -107,10 +109,33 @@ const addNewPlace = function(evt) {
   closeAddPopup();
 };
 
+
+function cardDelete (event){;
+  if(event.target.classList[0] === 'elements__delete'){
+    let itemDelete = event.target.parentElement;
+    let namePlace = itemDelete.querySelector('.elements__name').textContent;
+    let linkPlace = itemDelete.querySelector('.elements__img').src;
+    initialCards = initialCards.filter(element => {
+      if(element.name !== namePlace && element.link !== linkPlace){
+        return element;
+      }
+    });
+    elements.innerHTML = '';
+    AddElement();
+    // console.log(initialCards);
+  }
+}
+
+
+
 // Добавление лайка
 const likeAdd = function(event){
-  event.target.classList.toggle('elements__like_active');
+  if(event.target.classList[0] === 'elements__like'){
+    event.target.classList.toggle('elements__like_active');
+  };
 };
+
+elements.addEventListener('click', cardDelete);
 
 elements.addEventListener('click', likeAdd); // поставить лайк
 
