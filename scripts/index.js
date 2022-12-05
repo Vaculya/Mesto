@@ -15,13 +15,7 @@ let buttonEditFormOpen = document.querySelector(".profile__edit-btn"),
     placeName = document.querySelector('.popup__input_place_name'), // Название места в попап
     imgLink = document.querySelector('.popup__input_img_link'); //Ссылка на картинку в попап
 
-// Open profile popup
-// function openPopup (){
-//   popup.classList.add("popup_opened");
-//   nameInput.value = profileName.textContent;
-//   jobInput.value = profileAbout.textContent;
-// }
-
+    likeCard = document.querySelectorAll('.elements__like');
 
 function openPopupEdit (){
   popupEdit.classList.add("popup_opened");
@@ -113,7 +107,12 @@ const addNewPlace = function(evt) {
   closeAddPopup();
 };
 
+// Добавление лайка
+const likeAdd = function(event){
+  event.target.classList.toggle('elements__like_active');
+};
 
+elements.addEventListener('click', likeAdd); // поставить лайк
 
 buttonEditFormOpen.addEventListener("click", openPopupEdit); // открытие попап изменение профиля
 
