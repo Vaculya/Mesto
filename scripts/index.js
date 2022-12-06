@@ -27,12 +27,6 @@ let buttonEditFormOpen = document.querySelector(".profile__edit-btn"),
 
     popupTypePhotoClose = document.querySelector('.popup__close_btn-photo');
 
-
-
-
-
-
-
 function openPopupEdit (){
   popupEdit.classList.add("popup_opened");
   nameInput.value = profileName.textContent;
@@ -55,12 +49,10 @@ function closeEditPopup(){
 function closeAddPopup(){
   popupAdd.classList.remove("popup_opened");
 }
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 function closeElementPopup(){
   popupElement.classList.remove('popup_opened');
 }
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
 
 function ClosepopupTypePhoto(){
   popupTypePhoto.classList.remove('popup_opened');
@@ -124,19 +116,16 @@ function AddElement (){
 
 const addNewPlace = function(evt) {
   evt.preventDefault();
-  // добавление в массив нового оъекта
   initialCards.unshift(
     {
       name: placeName.value,
       link: imgLink.value
     }
   );
-
   elements.innerHTML = '';
   AddElement();
   closeAddPopup();
 };
-
 
 function cardDelete (event){
   if(event.target.classList[0] === 'elements__delete'){
@@ -150,7 +139,6 @@ function cardDelete (event){
     });
     elements.innerHTML = '';
     AddElement();
-    // console.log(initialCards);
   }
 }
 
@@ -162,7 +150,6 @@ const likeAdd = function(event){
 };
 
 // Открытие картинки
-
 function imgOpen(event){
   if(event.target.classList[0] === 'elements__img'){
     popupTypePhoto.classList.add('popup_opened');
@@ -178,13 +165,6 @@ function imgOpen(event){
     popupCaption.textContent = namePlace;
   }
 }
-
-
-
-
-
-
-
 
 elements.addEventListener('click', cardDelete); // удаление элемента
 
@@ -204,6 +184,7 @@ formAdd.addEventListener('submit', addNewPlace); // добавить новое 
 
 closeBtnAddPopup.addEventListener("click", closeAddPopup); // закрыть попап добавления фото
 
+popupTypePhotoClose.addEventListener('click', ClosepopupTypePhoto);
+
 window.onload = AddElement(); // закгрузка карточек при открытие страницы
 
-popupTypePhotoClose.addEventListener('click', ClosepopupTypePhoto);
