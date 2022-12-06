@@ -17,7 +17,21 @@ let buttonEditFormOpen = document.querySelector(".profile__edit-btn"),
 
     likeCard = document.querySelectorAll('.elements__like'),
 
-    deleteCard = document.querySelectorAll('.elements__delete');
+    deleteCard = document.querySelectorAll('.elements__delete'),
+
+    elementsImg = document.querySelectorAll('.elements__img'),
+
+    popupTypePhoto = document.querySelector('.popup_type_photo'),
+
+    popupTypePhoto = document.querySelector('.popup_type_photo'),
+
+    popupTypePhotoClose = document.querySelector('.popup__close_btn-photo');
+
+
+
+
+
+
 
 function openPopupEdit (){
   popupEdit.classList.add("popup_opened");
@@ -29,13 +43,27 @@ function openPopupAdd(){
   popupAdd.classList.add("popup_opened");
 }
 
+function openPopupElement(){
+  popupElement.classList.add('popup_opened');
+}
+
 // close popup
-function closePopup(){
-  popup.classList.remove("popup_opened");
+function closeEditPopup(){
+  popupEdit.classList.remove("popup_opened");
 }
 
 function closeAddPopup(){
   popupAdd.classList.remove("popup_opened");
+}
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+function closeElementPopup(){
+  popupElement.classList.remove('popup_opened');
+}
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+function ClosepopupTypePhoto(){
+  popupTypePhoto.classList.remove('popup_opened');
 }
 
 // save profile popup
@@ -45,7 +73,7 @@ function formSubmitHandler (evt) {
     profileName.textContent =  nameInput.value;
     profileAbout.textContent = jobInput.value;
 
-    closePopup();
+    closeEditPopup();
 };
 
 //Добавление фото на страницу
@@ -110,7 +138,7 @@ const addNewPlace = function(evt) {
 };
 
 
-function cardDelete (event){;
+function cardDelete (event){
   if(event.target.classList[0] === 'elements__delete'){
     let itemDelete = event.target.parentElement;
     let namePlace = itemDelete.querySelector('.elements__name').textContent;
@@ -126,8 +154,6 @@ function cardDelete (event){;
   }
 }
 
-
-
 // Добавление лайка
 const likeAdd = function(event){
   if(event.target.classList[0] === 'elements__like'){
@@ -135,15 +161,42 @@ const likeAdd = function(event){
   };
 };
 
-elements.addEventListener('click', cardDelete);
+// Открытие картинки
+
+function imgOpen(event){
+  if(event.target.classList[0] === 'elements__img'){
+    popupTypePhoto.classList.add('popup_opened');
+    let elementPhoto = event.target.parentElement;
+    let linkPlace = elementPhoto.querySelector('.elements__img').src;
+    let namePlace = elementPhoto.querySelector('.elements__name').textContent;
+    let popupImg = popupTypePhoto.querySelector('.popup__photo');
+    let popupCaption = popupTypePhoto.querySelector('.popup__caption');
+
+    popupTypePhoto.style.backgroundColor = 'rgba(0, 0, 0, .9)';
+    popupImg.setAttribute('src', linkPlace);
+    popupImg.setAttribute('alt', namePlace);
+    popupCaption.textContent = namePlace;
+  }
+}
+
+
+
+
+
+
+
+
+elements.addEventListener('click', cardDelete); // удаление элемента
 
 elements.addEventListener('click', likeAdd); // поставить лайк
+
+elements.addEventListener('click', imgOpen);
 
 buttonEditFormOpen.addEventListener("click", openPopupEdit); // открытие попап изменение профиля
 
 formEdit.addEventListener('submit', formSubmitHandler); //при нажатии сохранить в изменении профиля
 
-popupClose.addEventListener("click", closePopup); // Закрыть попап редактирования профиля
+popupClose.addEventListener("click", closeEditPopup); // Закрыть попап редактирования профиля
 
 buttonProfileaAdd.addEventListener('click', openPopupAdd); // открыть попап добавления фото
 
@@ -152,3 +205,5 @@ formAdd.addEventListener('submit', addNewPlace); // добавить новое 
 closeBtnAddPopup.addEventListener("click", closeAddPopup); // закрыть попап добавления фото
 
 window.onload = AddElement(); // закгрузка карточек при открытие страницы
+
+popupTypePhotoClose.addEventListener('click', ClosepopupTypePhoto);
