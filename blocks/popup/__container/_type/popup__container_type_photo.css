@@ -1,4 +1,5 @@
 .popup__container_type_photo{
   width: fit-content;
+  max-width: calc(75vw + 38px);
   background-color: transparent;
 }

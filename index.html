@@ -28,6 +28,7 @@
   <footer class="footer">
     <p class="footer__text">© 2020 Mesto Russia</p>
   </footer>
+
   <div class="popup popup_type_edit">
     <div class="popup__container">
       <button class="popup__close" type="button"></button>
@@ -35,7 +36,7 @@
       <form class="popup__form popup__form_type_edit" name="popup__profile" action="submit">
         <input class="popup__input popup__input_info_name" name="popup__name" type="text" placeholder="Введите свое имя и фамилию">
         <input class="popup__input popup__input_info_about" name="popup__about" type="text" placeholder="О себе">
-        <button class="popup__save" type="submit">Сохранить</button>
+        <button class="popup__save popup__save_type_edit" type="submit">Сохранить</button>
       </form>
     </div>
   </div>
@@ -52,7 +53,7 @@
     </div>
   </div>
 
-  <div class="popup popup_type_photo">
+  <div class="popup popup_type_photo popup__bg-img">
     <div class="popup__container popup__container_type_photo">
       <button class="popup__close popup__close_btn-photo" type="button"></button>
       <figure class="popup__figure">
@@ -62,13 +63,13 @@
     </div>
   </div>
 
-  <template id="element-template">
-    <div class="elements__item">
-      <button class="elements__delete" type="button"></button>
-      <img class="elements__img">
-      <div class="elements__caption">
-        <h2 class="elements__name"></h2>
-        <button class="elements__like" type="button"></button>
+  <template id="card-template">
+    <div class="card">
+      <button class="card__delete" type="button"></button>
+      <img class="card__img">
+      <div class="card__caption">
+        <h2 class="card__name"></h2>
+        <button class="card__like" type="button"></button>
       </div>
     </div>
   </template>
