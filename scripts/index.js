@@ -105,7 +105,7 @@ popupFormTypePhoto.addEventListener('submit', event => {
 
   elements.prepend(createCard({name: newNamePlace, link: newImgLinkPlace}));
 
-  closePopupForm();
+  closePopup(popupAddPlace);
   popupFormTypePhoto.reset();
 });
 
@@ -131,14 +131,6 @@ const saveNewProfile = () =>{
   profileAbout.textContent = infoProfileInput.value;
 };
 
-//Закрыть popup после submit
-const closePopupForm = () =>{
-  popupForm.forEach(form => {
-    const closestForm = form.closest('.popup');
-    closePopup(closestForm);
-  });
-};
-
 // открытие попап
 btnAddPlace.addEventListener('click', () => openPopup(popupAddPlace));
 btnEditProfile.addEventListener('click', () => {
@@ -156,5 +148,5 @@ btnClosePopup.forEach(button => {
 popupFormTypeEdit.addEventListener('submit', event =>{
   event.preventDefault();
   saveNewProfile();
-  closePopupForm();
+  closePopup(popupEditProfile);
 });
