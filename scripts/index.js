@@ -24,6 +24,8 @@ const popupPLaceFigure = popupPLace.querySelector('.popup__caption'); // под�
 
 const cardTemplate = document.querySelector('#card-template').content;// обертка карточки для клонирвания
 
+
+
 // РАБОТА С КАРТОЧКАМИ
 const initialCards = [
     {
@@ -109,15 +111,41 @@ popupFormTypePhoto.addEventListener('submit', event => {
   popupFormTypePhoto.reset();
 });
 
+// закртие открытого попапа
+const closeOpenedPopup = () => {
+  const openedPopup = document.querySelector('.popup_opened');
+  closePopup(openedPopup);
+};
+
+// закрытие на esc
+const closeByEsc = (event) => {
+  if(event.key === 'Escape'){
+    closeOpenedPopup();
+  }
+};
+
+// закрытие на клик не по форме или крестику
+const closeByClick = (event) => {
+  if(event.target.classList.contains('popup')){
+    closeOpenedPopup();
+  }
+};
+
 // открытие попап
 const openPopup = (popup) =>{
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closeByEsc);
+  document.addEventListener('mousedown', closeByClick);
 };
 
 // закрытие попап
 const closePopup = function (popup){
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closeByEsc);
+  document.removeEventListener('mousedown', closeByClick);
 };//удаление класса
+
+
 
 // Начальное значение в попап редактирования при открытии
 const putOldInfoProfile = () =>{
