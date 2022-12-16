@@ -1,7 +1,6 @@
 .popup__input-error{
   visibility: hidden;
-  margin-bottom: 13px;
-  min-height: 12px;
+  min-height: 30px;
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
