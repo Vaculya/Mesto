@@ -126,7 +126,6 @@ const closeOpenedPopup = () => {
   const openedPopup = document.querySelector('.popup_opened');
   const inputErrorList = Array.from(openedPopup.querySelectorAll('.popup__input_type_error'));
   inputErrorList.forEach((errorInput) => {
-    console.log(errorInput);
     deleteError(openedPopup, errorInput);
   });
   closePopup(openedPopup);
