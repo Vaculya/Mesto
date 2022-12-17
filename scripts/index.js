@@ -64,12 +64,13 @@ const deleteCard = (event) =>{
 
 // попап просмотра места
 const openPlace = (cardData) => {
-  openPopup(popupPLace);
 
   popuPlacePhoto.setAttribute('src', cardData.link);
   popuPlacePhoto.setAttribute('alt', cardData.name);
 
   popupPLaceFigure.textContent = cardData.name;
+
+  openPopup(popupPLace);
 };
 
 //Создание карточки
@@ -111,9 +112,23 @@ popupFormTypePhoto.addEventListener('submit', event => {
   popupFormTypePhoto.reset();
 });
 
-// закртие открытого попапа
+const deleteError = (popup, item) => {
+    if((item.classList.contains('popup__input_place_name')) || (item.classList.contains('popup__input_img_link'))){
+    item.value = '';
+  }
+  const errorMassage = popup.querySelector(`.${item.id}-error`);
+  errorMassage.classList.remove('popup__error_visible');
+  item.classList.remove('popup__input_type_error');
+};
+
+// закртие открытого попапа по клику или esc
 const closeOpenedPopup = () => {
   const openedPopup = document.querySelector('.popup_opened');
+  const inputErrorList = Array.from(openedPopup.querySelectorAll('.popup__input_type_error'));
+  inputErrorList.forEach((errorInput) => {
+    console.log(errorInput);
+    deleteError(openedPopup, errorInput);
+  });
   closePopup(openedPopup);
 };
 
@@ -136,6 +151,7 @@ const openPopup = (popup) =>{
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closeByEsc);
   document.addEventListener('mousedown', closeByClick);
+  addDesableBtn(formElements, popup);
 };
 
 // закрытие попап
@@ -162,8 +178,8 @@ const saveNewProfile = () =>{
 // открытие попап
 btnAddPlace.addEventListener('click', () => openPopup(popupAddPlace));
 btnEditProfile.addEventListener('click', () => {
-  openPopup(popupEditProfile);
   putOldInfoProfile();
+  openPopup(popupEditProfile);
 });
 
 // закртие на крестик
