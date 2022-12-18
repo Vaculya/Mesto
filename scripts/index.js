@@ -121,6 +121,13 @@ const deleteError = (popup, item) => {
   item.classList.remove('popup__input_type_error');
 };
 
+const cleanInputs = (popup) => {
+  const inputList = Array.from(popup.querySelectorAll('.popup__input'));
+  inputList.forEach((input) => {
+    input.value = '';
+  });
+};
+
 // закртие открытого попапа по клику или esc
 const closeOpenedPopup = () => {
   const openedPopup = document.querySelector('.popup_opened');
@@ -128,6 +135,9 @@ const closeOpenedPopup = () => {
   inputErrorList.forEach((errorInput) => {
     deleteError(openedPopup, errorInput);
   });
+  if(openedPopup.classList.contains('popup_type_add')){
+    cleanInputs(openedPopup);
+  }
   closePopup(openedPopup);
 };
 
@@ -150,7 +160,6 @@ const openPopup = (popup) =>{
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closeByEsc);
   document.addEventListener('mousedown', closeByClick);
-  addDesableBtn(formElements, popup);
 };
 
 // закрытие попап
@@ -175,8 +184,12 @@ const saveNewProfile = () =>{
 };
 
 // открытие попап
-btnAddPlace.addEventListener('click', () => openPopup(popupAddPlace));
+btnAddPlace.addEventListener('click', () => {
+  addDesableBtn(formElements, popupAddPlace);
+  openPopup(popupAddPlace);
+});
 btnEditProfile.addEventListener('click', () => {
+  addDesableBtn(formElements, popupEditProfile);
   putOldInfoProfile();
   openPopup(popupEditProfile);
 });
