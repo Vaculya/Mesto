@@ -121,12 +121,7 @@ const deleteError = (popup, item) => {
   item.classList.remove('popup__input_type_error');
 };
 
-const cleanInputs = (popup) => {
-  const inputList = Array.from(popup.querySelectorAll('.popup__input'));
-  inputList.forEach((input) => {
-    input.value = '';
-  });
-};
+
 
 // закртие открытого попапа по клику или esc
 const closeOpenedPopup = () => {
@@ -135,9 +130,6 @@ const closeOpenedPopup = () => {
   inputErrorList.forEach((errorInput) => {
     deleteError(openedPopup, errorInput);
   });
-  if(openedPopup.classList.contains('popup_type_add')){
-    cleanInputs(openedPopup);
-  }
   closePopup(openedPopup);
 };
 
