@@ -159,7 +159,7 @@ const closePopup = function (popup){
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closeByEsc);
   document.removeEventListener('mousedown', closeByClick);
-};//удаление класса
+};
 
 
 
