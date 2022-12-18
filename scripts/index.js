@@ -112,24 +112,11 @@ popupFormTypePhoto.addEventListener('submit', event => {
   popupFormTypePhoto.reset();
 });
 
-const deleteError = (popup, item) => {
-    if((item.classList.contains('popup__input_place_name')) || (item.classList.contains('popup__input_img_link'))){
-    item.value = '';
-  }
-  const errorMassage = popup.querySelector(`.${item.id}-error`);
-  errorMassage.classList.remove('popup__error_visible');
-  item.classList.remove('popup__input_type_error');
-};
-
 
 
 // закртие открытого попапа по клику или esc
 const closeOpenedPopup = () => {
   const openedPopup = document.querySelector('.popup_opened');
-  const inputErrorList = Array.from(openedPopup.querySelectorAll('.popup__input_type_error'));
-  inputErrorList.forEach((errorInput) => {
-    deleteError(openedPopup, errorInput);
-  });
   closePopup(openedPopup);
 };
 
@@ -177,10 +164,12 @@ const saveNewProfile = () =>{
 
 // открытие попап
 btnAddPlace.addEventListener('click', () => {
+  deleteErrorsInForm(popupFormTypePhoto);
   addDesableBtn(formElements, popupAddPlace);
   openPopup(popupAddPlace);
 });
 btnEditProfile.addEventListener('click', () => {
+  deleteErrorsInForm(popupFormTypeEdit);
   addDesableBtn(formElements, popupEditProfile);
   putOldInfoProfile();
   openPopup(popupEditProfile);

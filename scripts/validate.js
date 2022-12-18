@@ -7,6 +7,25 @@ const formElements = {
   errorClass: 'popup__error_visible' //для span
 };
 
+//удаление из инпут
+const deleteErrorInInput = (form, errorInput) => {
+  if((errorInput.classList.contains('popup__input_place_name')) || (errorInput.classList.contains('popup__input_img_link'))){
+    errorInput.value = '';
+  }
+  const errorMassage = form.querySelector(`.${errorInput.id}-error`);
+  errorMassage.classList.remove(formElements.errorClass);
+  errorInput.classList.remove(formElements.inputErrorClass);
+};
+
+// удаление из формы унипутов с ошибкой и его текст ошибки
+const deleteErrorsInForm = (form) => {
+  const inputErrorList = Array.from(form.querySelectorAll(`.${formElements.inputErrorClass}`));
+  inputErrorList.forEach((errorInput) => {
+    deleteErrorInInput(form, errorInput);
+  });
+};
+
+
 //показать спан ошибки и подчерк красным инпут
 const showInputError = (formElement, inputElement, errorMassage) =>{
   const errorElem = formElement.querySelector(`.${inputElement.id}-error`);
