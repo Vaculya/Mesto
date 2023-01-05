@@ -79,6 +79,12 @@ class Card{
     this._cardElement.querySelector('.card__like').addEventListener('click', () => {
       this._likeCard();
     });
+    this._cardElement.querySelector('.card__delete').addEventListener('click', () => {
+      this._deleteCard();
+    });
+    this._cardElement.querySelector('.card__img').addEventListener('click', () => {
+      this._openCard();
+    });
   }
 
   _likeCard(){
@@ -86,7 +92,16 @@ class Card{
     likeBtn.classList.toggle('card__like_active');
   }
 
+  _deleteCard(){
+    const deleteBtn  = this._cardElement.querySelector('.card__delete');
+    deleteBtn.closest('.card').remove();
+  }
 
+  _openCard(){
+    popuPlacePhoto.setAttribute('src', this._image);
+    popupPLaceFigure.textContent = this._name;
+    popupPLace.classList.add('popup_opened');
+  }
 }
 
 initialCards.forEach((item) => {
