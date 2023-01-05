@@ -77,14 +77,15 @@ class Card{
 
   _eventListeners(){
     this._cardElement.querySelector('.card__like').addEventListener('click', () => {
-      this._likeIt();
+      this._likeCard();
     });
   }
 
-  _likeIt(){
+  _likeCard(){
     const likeBtn = this._cardElement.querySelector('.card__like');
     likeBtn.classList.toggle('card__like_active');
   }
+
 
 }
 
