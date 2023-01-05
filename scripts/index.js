@@ -64,14 +64,28 @@ class Card{
     return this._card;
   }
 
+
   generateCard(){
     this._cardElement = this._getTemplateCard();
+    this._eventListeners();
 
     this._cardElement.querySelector('.card__img').setAttribute('src', this._image);
     this._cardElement.querySelector('.card__name').textContent = this._name;
 
     return this._cardElement;
   }
+
+  _eventListeners(){
+    this._cardElement.querySelector('.card__like').addEventListener('click', () => {
+      this._likeIt();
+    });
+  }
+
+  _likeIt(){
+    const likeBtn = this._cardElement.querySelector('.card__like');
+    likeBtn.classList.toggle('card__like_active');
+  }
+
 }
 
 initialCards.forEach((item) => {
