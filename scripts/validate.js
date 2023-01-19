@@ -1,100 +1,160 @@
-const formElements = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button_disabled',
-  inputErrorClass: 'popup__input_type_error', //для input
-  errorClass: 'popup__error_visible' //для span
-};
+export default class Validate {
+  constructor(dataForm, formElement){
+    this._inputSelector = dataForm.inputSelector; //'.popup__input'
+    this._submitButtonSelector = dataForm.submitButtonSelector; //'.popup__button'
+    this._inactiveButtonClass = dataForm.inactiveButtonClass; //'popup__button_disabled'
+    this._inputErrorClass = dataForm.inputErrorClass; //для input
+    this._errorClass = dataForm.errorClass; //для span
 
-//удаление из инпут
-const deleteErrorInInput = (form, errorInput) => {
-  if((errorInput.classList.contains('popup__input_place_name')) || (errorInput.classList.contains('popup__input_img_link'))){
-    errorInput.value = '';
+    this._formElement = formElement; // для определения какой попап формы
+
+    this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector)); //все инпуты в нужной форме
+    this._buttonForm = this._formElement.querySelector(this._submitButtonSelector); //кнопка в нужной форме
   }
-  const errorMassage = form.querySelector(`.${errorInput.id}-error`);
-  errorMassage.classList.remove(formElements.errorClass);
-  errorInput.classList.remove(formElements.inputErrorClass);
-};
 
-// удаление из формы унипутов с ошибкой и его текст ошибки
-const deleteErrorsInForm = (form) => {
-  const inputErrorList = Array.from(form.querySelectorAll(`.${formElements.inputErrorClass}`));
-  inputErrorList.forEach((errorInput) => {
-    deleteErrorInInput(form, errorInput);
-  });
-};
-
-
-//показать спан ошибки и подчерк красным инпут
-const showInputError = (formElement, inputElement, errorMassage) =>{
-  const errorElem = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add(formElements.inputErrorClass);
-  errorElem.textContent = errorMassage;
-  errorElem.classList.add(formElements.errorClass);
-};
-
-//скрыть спан ошибки и убрать красным инпут
-const hideInputError = (formElement, inputElement) => {
-  const errorElem = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove(formElements.inputErrorClass);
-  errorElem.classList.remove(formElements.errorClass);
-  errorElem.textContent = '';
-};
-
-//валидность для кнопки
-const isValideForBtn = (inputList) => {
-  return inputList.some((inputItem) => {
-    return (!inputItem.validity.valid);
-  });
-};
-
-// изменение кнопки
-const toggleButtonState = (inputList, buttonSelector) => {
-  if(isValideForBtn(inputList)){
-    buttonSelector.classList.add(formElements.inactiveButtonClass);
-    buttonSelector.setAttribute('disabled', '');
-  }else{
-    buttonSelector.classList.remove(formElements.inactiveButtonClass);
-    buttonSelector.removeAttribute('disabled');
+  //показать спан ошибки и подчерк красным инпут
+  _showInputError(inputElement, errorMassage){ // принимает инпут с ошибкой и текст, котрый нужно показать
+    const errorElem = this._formElement.querySelector(`.${inputElement.id}-error`); //находим спан, который относится к инпуту по id в нужной форме
+    errorElem.textContent = errorMassage; // прописываем спану ошибку из инпут
+    inputElement.classList.add(this._inputErrorClass); //добавляем класс ошибки к инпут
+    errorElem.classList.add(this._errorClass); // показываем спан ошибки
   }
-};
 
-// валидность инпут
-const checkInputValidity = (formElement, inputElement) => {
-  if(!inputElement.validity.valid){
-    showInputError(formElement, inputElement, inputElement.validationMessage);
-  }else{
-    hideInputError(formElement, inputElement);
+  //скрыть спан ошибки и убрать красным инпут
+  _hideInputError (inputElement){
+    const errorElem = this._formElement.querySelector(`.${inputElement.id}-error`); //находим спан, который относится к инпуту по id в нужной форме
+    errorElem.textContent = ''; // очищаем спан с ошибкой
+    inputElement.classList.remove(this._inputErrorClass); //удаляем класс ошибки к инпут
+    errorElem.classList.remove(this._errorClass); // скрываем спан ошибки
   }
-};
 
-const addDesableBtn = (formElements, popup) => {
-  const button = popup.querySelector(formElements.submitButtonSelector);
-  button.setAttribute('disabled', '');
-  button.classList.add(formElements.inactiveButtonClass);
-};
-
-const setEventListeners = (formElement) => {
-  const inputList = Array.from(formElement.querySelectorAll(formElements.inputSelector));
-  const buttonElement = formElement.querySelector(formElements.submitButtonSelector);
-  toggleButtonState(inputList, buttonElement);
-  inputList.forEach((inputElement) => {
-    inputElement.addEventListener('input', () => {
-      checkInputValidity(formElement, inputElement);
-      toggleButtonState(inputList, buttonElement);
+  //валидность для кнопки
+  _isValideForBtn(inputList){
+    return inputList.some((inputElement) => {
+      return (!inputElement.validity.valid);
     });
-  });
-};
+  }
+  // изменение кнопки
+  _toggleButtonState(inputList){
+    if(this._isValideForBtn(inputList)){
+      this._buttonForm.classList.add(this._inactiveButtonClass);
+    } else{
+      this._buttonForm.classList.remove(this._inactiveButtonClass);
+    }
+  }
 
-const enableValidation = (formElements) => {
-  const formList = Array.from(document.querySelectorAll(formElements.formSelector));
-  formList.forEach((formElement) => {
-    formElement.addEventListener('submit', (event)=>{
-      event.preventDefault();
-    });
-    setEventListeners(formElement);
-  });
-};
+  // валидность инпут
+  _checkInputValidity(inputElement){
+    if(!inputElement.validity.valid){
+      this._showInputError(inputElement, inputElement.validationMessage);
+    }else{
+      this._hideInputError(inputElement);
+    }
+  }
 
-enableValidation(formElements);
+  _setEventListeners(){
+    this._toggleButtonState(this._inputList);
+    this._inputList.forEach((inputElement) => inputElement.addEventListener('input', () => {
+      this._checkInputValidity(inputElement);
+      this._toggleButtonState(this._inputList);
+    }));
+  }
+
+  enableValidation (){
+    this._setEventListeners();
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// //показать спан ошибки и подчерк красным инпут
+// const showInputError = (formElement, inputElement, errorMassage) =>{
+//   const errorElem = formElement.querySelector(`.${inputElement.id}-error`);
+//   inputElement.classList.add(formElements.inputErrorClass);
+//   errorElem.textContent = errorMassage;
+//   errorElem.classList.add(formElements.errorClass);
+// };
+
+// //скрыть спан ошибки и убрать красным инпут
+// const hideInputError = (formElement, inputElement) => {
+//   const errorElem = formElement.querySelector(`.${inputElement.id}-error`);
+//   inputElement.classList.remove(formElements.inputErrorClass);
+//   errorElem.classList.remove(formElements.errorClass);
+//   errorElem.textContent = '';
+// };
+
+// //валидность для кнопки
+// const isValideForBtn = (inputList) => {
+//   return inputList.some((inputItem) => {
+//     return (!inputItem.validity.valid);
+//   });
+// };
+
+// // изменение кнопки
+// const toggleButtonState = (inputList, buttonSelector) => {
+//   if(isValideForBtn(inputList)){
+//     buttonSelector.classList.add(formElements.inactiveButtonClass);
+//   } else{
+//     buttonSelector.classList.remove(formElements.inactiveButtonClass);
+//   }
+// };
+
+// // валидность инпут
+// const checkInputValidity = (formElement, inputElement) => {
+//   if(!inputElement.validity.valid){
+//     showInputError(formElement, inputElement, inputElement.validationMessage);
+//   }else{
+//     hideInputError(formElement, inputElement);
+//   }
+// };
+
+// const setEventListeners = (formElement) => {
+//   const inputList = Array.from(formElement.querySelectorAll(formElements.inputSelector));
+//   const buttonElement = formElement.querySelector(formElements.submitButtonSelector);
+//   toggleButtonState(inputList, buttonElement);
+//   inputList.forEach((inputElement) => inputElement.addEventListener('input', () => {
+//     checkInputValidity(formElement, inputElement);
+//     toggleButtonState(inputList, buttonElement);
+//   }));
+// };
+
+// const enableValidation = (formElements) => {
+//   const formList = Array.from(document.querySelectorAll(formElements.formSelector));
+//   formList.forEach((formElement) => {
+//     formElement.addEventListener('submit', (event)=>{
+//       event.preventDefault();
+//     });
+//     setEventListeners(formElement);
+//   });
+// };
+
+// enableValidation(formElements);
