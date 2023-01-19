@@ -52,6 +52,15 @@ const initialCards = [
   }
 ];
 
+const formElements = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error', //для input
+  errorClass: 'popup__error_visible' //для span
+};
+
 export {
   elements,
   btnEditProfile,
@@ -72,5 +81,6 @@ export {
   popuPlacePhoto,
   popupPLaceFigure,
   cardTemplate,
-  initialCards
+  initialCards,
+  formElements
 };

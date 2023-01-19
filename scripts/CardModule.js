@@ -1,6 +1,6 @@
 //этот модуль импортируем в модуль поверки валидации при правильном вводе данных и при начальной отрисовке
 
-import {popupPLace, popuPlacePhoto, popupPLaceFigure} from './variables.js'
+import {popupPLace, popuPlacePhoto, popupPLaceFigure} from './variables.js';
 
 export default class Card{
   constructor ( data){

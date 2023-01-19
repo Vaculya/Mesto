@@ -18,12 +18,18 @@ import{
   // popuPlacePhoto,
   // popupPLaceFigure,
   // cardTemplate,
-  initialCards
+  initialCards,
+  formElements
 } from './variables.js';
 
 import Card from './CardModule.js';
+import Validate from './validate.js';
 
+const popupFormTypePhotoValidate = new Validate(formElements, popupFormTypePhoto);
+popupFormTypePhotoValidate.enableValidation();
 
+const popupFormTypeEditValidate = new Validate(formElements, popupFormTypeEdit);
+popupFormTypeEditValidate.enableValidation();
 
 // Начальное построение карточки
 initialCards.forEach((item)  =>{
