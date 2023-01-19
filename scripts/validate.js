@@ -1,20 +1,8 @@
-// const formElements = {
-//   formSelector: '.popup__form',
-//   inputSelector: '.popup__input',
-//   submitButtonSelector: '.popup__button',
-//   inactiveButtonClass: 'popup__button_disabled',
-//   inputErrorClass: 'popup__input_type_error', //для input
-//   errorClass: 'popup__error_visible' //для span
-// };
-
-// import {formElements} from './variables.js';
-
 export default class Validate {
   constructor(dataForm, formElement){
-    // this._formSelector = dataForm.formSelector;
-    this._inputSelector = dataForm.inputSelector;
-    this._submitButtonSelector = dataForm.submitButtonSelector;
-    this._inactiveButtonClass = dataForm.inactiveButtonClass;
+    this._inputSelector = dataForm.inputSelector; //'.popup__input'
+    this._submitButtonSelector = dataForm.submitButtonSelector; //'.popup__button'
+    this._inactiveButtonClass = dataForm.inactiveButtonClass; //'popup__button_disabled'
     this._inputErrorClass = dataForm.inputErrorClass; //для input
     this._errorClass = dataForm.errorClass; //для span
 
@@ -75,8 +63,6 @@ export default class Validate {
   enableValidation (){
     this._setEventListeners();
   }
-
-  // enableValidation(formElements);
 }
 
 

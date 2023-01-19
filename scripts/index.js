@@ -7,17 +7,12 @@ import{
   btnClosePopup,
   profileName,
   profileAbout,
-  // popupForm,
   nameProfileInput,
   infoProfileInput,
   popupFormTypeEdit,
   popupFormTypePhoto,
   inputNewPlaceName,
   inputNewPlaceLink,
-  // popupPLace,
-  // popuPlacePhoto,
-  // popupPLaceFigure,
-  // cardTemplate,
   initialCards,
   formElements
 } from './variables.js';
@@ -37,56 +32,6 @@ initialCards.forEach((item)  =>{
   elements.append(card.generateCard());
 });
 
-
-
-
-
-
-
-// const likeCard = (event)  => {
-//   event.target.classList.toggle('card__like_active');
-// };
-
-// const deleteCard = (event) =>{
-//   event.target.closest('.card').remove();
-// };
-
-// попап просмотра места
-// const openPlace = (cardData) => {
-//   openPopup(popupPLace);
-
-//   popuPlacePhoto.setAttribute('src', cardData.link);
-//   popuPlacePhoto.setAttribute('alt', cardData.name);
-
-//   popupPLaceFigure.textContent = cardData.name;
-// };
-
-//Создание карточки
-// const createCard = (cardData) => {
-//   const card = cardTemplate.querySelector('.card').cloneNode(true);
-//   const cardImg = card.querySelector('.card__img');
-
-//   cardImg.src = cardData.link;
-//   cardImg.alt = cardData.name;
-//   card.querySelector('.card__name').textContent = cardData.name;
-
-//   //Лайк
-//   card.querySelector('.card__like').addEventListener('click',(event) => likeCard(event));
-
-//   // удалить
-//   card.querySelector('.card__delete').addEventListener('click', (event) => deleteCard(event));
-
-//   // попап картинки
-//   cardImg.addEventListener('click', () => openPlace(cardData));
-
-//   return card;
-// };
-
-// Первоначальная загрузка из массива
-// initialCards.forEach(item =>{
-//   elements.append(createCard(item));
-// });
-
 // закртие попапа профиля  и Добавить добавление фото
 popupFormTypePhoto.addEventListener('submit', event => {
   event.preventDefault();
@@ -94,7 +39,8 @@ popupFormTypePhoto.addEventListener('submit', event => {
   const newNamePlace = inputNewPlaceName.value;
   const newImgLinkPlace = inputNewPlaceLink.value;
 
-  elements.prepend(createCard({name: newNamePlace, link: newImgLinkPlace}));
+  const card = new Card({name: newNamePlace, link: newImgLinkPlace});
+  elements.prepend(card.generateCard());
 
   closePopup(popupAddPlace);
   popupFormTypePhoto.reset();
@@ -116,6 +62,7 @@ const closeByEsc = (event) => {
 // закрытие на клик не по форме или крестику
 const closeByClick = (event) => {
   if(event.target.classList.contains('popup')){
+    console.log(1);
     closeOpenedPopup();
   }
 };
