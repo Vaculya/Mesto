@@ -38,7 +38,6 @@ export default class Card{
 
   // Приватный метод откртия попап с картинкой
   _openCardPopup(){
-    console.log(popupPLace);
     popuPlacePhoto.src = this._image;
     popuPlacePhoto.alt = this._description;
     popupPLaceFigure.textContent = this._title;

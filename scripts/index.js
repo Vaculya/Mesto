@@ -49,6 +49,7 @@ popupFormTypePhoto.addEventListener('submit', event => {
 
 
 // закртие открытого попапа по клику или esc
+// закртие открытого попапа
 const closeOpenedPopup = () => {
   const openedPopup = document.querySelector('.popup_opened');
   closePopup(openedPopup);
@@ -64,7 +65,6 @@ const closeByEsc = (event) => {
 // закрытие на клик не по форме или крестику
 const closeByClick = (event) => {
   if(event.target.classList.contains('popup')){
-    console.log(1);
     closeOpenedPopup();
   }
 };
@@ -76,8 +76,18 @@ const openPopup = (popup) =>{
   document.addEventListener('mousedown', closeByClick);
 };
 
+const unvisibleErrors = (popup) =>{
+  const errorsList = Array.from(popup.querySelectorAll('.popup__error_visible'));
+  errorsList.forEach((errorItem) => {
+    errorItem.classList.remove('popup__error_visible');
+  });
+};
+
 // закрытие попап
 const closePopup = function (popup){
+  if (popup.classList.contains('popup_type_edit') || popup.classList.contains('popup_type_add')){
+    unvisibleErrors(popup);
+  }
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closeByEsc);
   document.removeEventListener('mousedown', closeByClick);
@@ -97,15 +107,16 @@ const saveNewProfile = () =>{
   profileAbout.textContent = infoProfileInput.value;
 };
 
+
 // открытие попап
 btnAddPlace.addEventListener('click', () => {
-  deleteErrorsInForm(popupFormTypePhoto);
-  addDesableBtn(formElements, popupAddPlace);
+  popupFormTypePhotoValidate.deleteErrors();
+  popupFormTypePhotoValidate.disabledBtn();
   openPopup(popupAddPlace);
 });
 btnEditProfile.addEventListener('click', () => {
-  deleteErrorsInForm(popupFormTypeEdit);
-  addDesableBtn(formElements, popupEditProfile);
+  popupFormTypeEditValidate.deleteErrors();
+  popupFormTypeEditValidate.disabledBtn();
   putOldInfoProfile();
   openPopup(popupEditProfile);
 });
