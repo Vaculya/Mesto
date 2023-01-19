@@ -60,6 +60,18 @@ export default class Validate {
     }));
   }
 
+  deleteErrors(){
+    this._inputList.forEach((inputItem) => {
+        console.log(inputItem);
+        inputItem.value = '';
+        this._hideInputError(inputItem);
+    });
+  }
+
+  disabledBtn(){
+    this._buttonForm.classList.add(this._inactiveButtonClass);
+  }
+
   enableValidation (){
     this._setEventListeners();
   }
