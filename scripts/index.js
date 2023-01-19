@@ -7,63 +7,79 @@ import{
   btnClosePopup,
   profileName,
   profileAbout,
-  popupForm,
+  // popupForm,
   nameProfileInput,
   infoProfileInput,
   popupFormTypeEdit,
   popupFormTypePhoto,
   inputNewPlaceName,
   inputNewPlaceLink,
-  popupPLace,
-  popuPlacePhoto,
-  popupPLaceFigure,
-  cardTemplate,
+  // popupPLace,
+  // popuPlacePhoto,
+  // popupPLaceFigure,
+  // cardTemplate,
   initialCards
 } from './variables.js';
 
-const likeCard = (event)  => {
-  event.target.classList.toggle('card__like_active');
-};
+import Card from './CardModule.js';
 
-const deleteCard = (event) =>{
-  event.target.closest('.card').remove();
-};
+
+
+// Начальное построение карточки
+initialCards.forEach((item)  =>{
+  const card = new Card(item);
+  elements.append(card.generateCard());
+});
+
+
+
+
+
+
+
+// const likeCard = (event)  => {
+//   event.target.classList.toggle('card__like_active');
+// };
+
+// const deleteCard = (event) =>{
+//   event.target.closest('.card').remove();
+// };
 
 // попап просмотра места
-const openPlace = (cardData) => {
-  openPopup(popupPLace);
+// const openPlace = (cardData) => {
+//   openPopup(popupPLace);
 
-  popuPlacePhoto.setAttribute('src', cardData.link);
-  popuPlacePhoto.setAttribute('alt', cardData.name);
+//   popuPlacePhoto.setAttribute('src', cardData.link);
+//   popuPlacePhoto.setAttribute('alt', cardData.name);
 
-  popupPLaceFigure.textContent = cardData.name;
-};
+//   popupPLaceFigure.textContent = cardData.name;
+// };
 
 //Создание карточки
-const createCard = (cardData) => {
-  const card = cardTemplate.querySelector('.card').cloneNode(true);
-  const cardImg = card.querySelector('.card__img');
+// const createCard = (cardData) => {
+//   const card = cardTemplate.querySelector('.card').cloneNode(true);
+//   const cardImg = card.querySelector('.card__img');
 
-  cardImg.src = cardData.link;
-  cardImg.alt = cardData.name;
-  card.querySelector('.card__name').textContent = cardData.name;
+//   cardImg.src = cardData.link;
+//   cardImg.alt = cardData.name;
+//   card.querySelector('.card__name').textContent = cardData.name;
 
-  //Лайк
-  card.querySelector('.card__like').addEventListener('click',(event) => likeCard(event));
+//   //Лайк
+//   card.querySelector('.card__like').addEventListener('click',(event) => likeCard(event));
 
-  // удалить
-  card.querySelector('.card__delete').addEventListener('click', (event) => deleteCard(event));
+//   // удалить
+//   card.querySelector('.card__delete').addEventListener('click', (event) => deleteCard(event));
 
-  // попап картинки
-  cardImg.addEventListener('click', () => openPlace(cardData));
+//   // попап картинки
+//   cardImg.addEventListener('click', () => openPlace(cardData));
 
-  return card;
-};
+//   return card;
+// };
 
 // Первоначальная загрузка из массива
-initialCards.forEach(item =>{
-  elements.append(createCard(item));
-});
+// initialCards.forEach(item =>{
+//   elements.append(createCard(item));
+// });
 
 // закртие попапа профиля  и Добавить добавление фото
 popupFormTypePhoto.addEventListener('submit', event => {
