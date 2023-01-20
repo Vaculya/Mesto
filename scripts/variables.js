@@ -5,7 +5,7 @@ const btnEditProfile = document.querySelector('.profile__edit-btn');// Кноп�
 const btnAddPlace = document.querySelector('.profile__add-btn'); // Кнопка добавления нового места
 const popupEditProfile = document.querySelector('.popup_type_edit');// Попап редактирования профиля
 const popupAddPlace = document.querySelector('.popup_type_add'); // Попап добавления нового места
-const btnClosePopup = document.querySelectorAll('.popup__close'); // Кнопки закрытия popup
+const btnClosePopupList = document.querySelectorAll('.popup__close'); // Кнопки закрытия popup
 
 const profileName = document.querySelector('.profile__name'); // Строка имени в профиле
 const profileAbout =  document.querySelector('.profile__about'); // Строка о себе в профиле
@@ -67,7 +67,7 @@ export {
   btnAddPlace,
   popupEditProfile,
   popupAddPlace,
-  btnClosePopup,
+  btnClosePopupList,
   profileName,
   profileAbout,
   popupForm,
