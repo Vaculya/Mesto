@@ -79,6 +79,7 @@ const closeOpenedPopup = () => {
 // закрытие на esc
 const closeByEsc = (event) => {
   if(event.key === 'Escape'){
+    console.log('close');
     closeOpenedPopup();
   }
 };
@@ -93,14 +94,14 @@ const closeByClick = (event) => {
 // открытие попап
 const openPopup = (popup) =>{
   popup.classList.add('popup_opened');
-  popup.addEventListener('keydown', closeByEsc);
+  document.addEventListener('keydown', closeByEsc);
   popup.addEventListener('mousedown', closeByClick);
 };
 
 // закрытие попап
 const closePopup = function (popup){
   popup.classList.remove('popup_opened');
-  popup.removeEventListener('keydown', closeByEsc);
+  document.removeEventListener('keydown', closeByEsc);
   popup.removeEventListener('mousedown', closeByClick);
 };
 
