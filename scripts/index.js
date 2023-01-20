@@ -7,17 +7,22 @@ import{
   btnClosePopup,
   profileName,
   profileAbout,
+  popupForm,
   nameProfileInput,
   infoProfileInput,
   popupFormTypeEdit,
   popupFormTypePhoto,
   inputNewPlaceName,
   inputNewPlaceLink,
+  popupPLace,
+  popuPlacePhoto,
+  popupPLaceFigure,
+  cardTemplate,
   initialCards,
   formElements
 } from './variables.js';
 
-import Card from './CardModule.js';
+import Card from './card.js';
 import Validate from './validate.js';
 
 const popupFormTypePhotoValidate = new Validate(formElements, popupFormTypePhoto);
@@ -28,7 +33,7 @@ popupFormTypeEditValidate.enableValidation();
 
 // Начальное построение карточки
 initialCards.forEach((item)  =>{
-  const card = new Card(item);
+  const card = new Card(item, '#card-template', handleOpenPopup);
   elements.append(card.generateCard());
 });
 
@@ -39,7 +44,7 @@ popupFormTypePhoto.addEventListener('submit', event => {
   const newNamePlace = inputNewPlaceName.value;
   const newImgLinkPlace = inputNewPlaceLink.value;
 
-  const card = new Card({name: newNamePlace, link: newImgLinkPlace});
+  const card = new Card({name: newNamePlace, link: newImgLinkPlace}, '#card-template', handleOpenPopup);
   elements.prepend(card.generateCard());
 
   closePopup(popupAddPlace);
@@ -107,6 +112,13 @@ const saveNewProfile = () =>{
   profileAbout.textContent = infoProfileInput.value;
 };
 
+// Открыть попап картинки
+function handleOpenPopup(name, link) {
+  popuPlacePhoto.src = link;
+  popuPlacePhoto.alt = name;
+  popupPLaceFigure.textContent = name;
+  openPopup(popupPLace);
+}
 
 // открытие попап
 btnAddPlace.addEventListener('click', () => {
