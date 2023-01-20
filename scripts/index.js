@@ -99,10 +99,6 @@ const openPopup = (popup) =>{
 
 // закрытие попап
 const closePopup = function (popup){
-  // if (popup.classList.contains('popup_type_edit') || popup.classList.contains('popup_type_add')){
-  //   unvisibleErrors(popup);
-  //   // inputItem.value = ''; по всем инпутам попап пройтись
-  // }
   popup.classList.remove('popup_opened');
   popup.removeEventListener('keydown', closeByEsc);
   popup.removeEventListener('mousedown', closeByClick);
