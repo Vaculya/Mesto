@@ -37,8 +37,7 @@ export default class FormValidator {
   // изменение кнопки
   _toggleButtonState(){
     if(this._isValideForBtn()){
-      this._buttonForm.classList.add(this._inactiveButtonClass);
-      this._buttonForm.disabled = true;
+      this.disabledBtn();
     } else{
       this._buttonForm.classList.remove(this._inactiveButtonClass);
       this._buttonForm.disabled = false;

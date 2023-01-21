@@ -20,7 +20,7 @@ import{
   formElements
 } from './variables.js';
 
-import Card from './card.js';
+import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 
 const popupFormTypePhotoValidate = new FormValidator(formElements, popupFormTypePhoto);
@@ -31,8 +31,7 @@ popupFormTypeEditValidate.enableValidation();
 
 const createCard = (item, templateElem, functionToOpen) =>{
   const card = new Card(item, templateElem, functionToOpen);
-
-  return card;
+  return card.generateCard();
 };
 
 // Начальное построение карточки
@@ -42,16 +41,11 @@ const cardList = [];
 function cardListCreate (){
   initialCards.forEach((item)  =>{
     const card = createCard(item, '#card-template', handleOpenPopup);
-    cardList.unshift(card);
+    elements.append(card);
   });
 }
 
 cardListCreate();
-
-cardList.forEach((card)=>{
-  elements.prepend(card.generateCard());
-});
-
 
 // закртие попапа профиля  и Добавить добавление фото
 popupFormTypePhoto.addEventListener('submit', event => {
@@ -60,8 +54,8 @@ popupFormTypePhoto.addEventListener('submit', event => {
   const newNamePlace = inputNewPlaceName.value;
   const newImgLinkPlace = inputNewPlaceLink.value;
 
-  const card = new Card({name: newNamePlace, link: newImgLinkPlace}, '#card-template', handleOpenPopup);
-  elements.prepend(card.generateCard());
+  const card = createCard({name: newNamePlace, link: newImgLinkPlace}, '#card-template', handleOpenPopup);
+  elements.prepend(card);
 
   closePopup(popupAddPlace);
   popupFormTypePhoto.reset();

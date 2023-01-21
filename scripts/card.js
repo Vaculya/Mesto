@@ -46,7 +46,7 @@ export default class Card{
   }
 
   _setEventListener(){
-    this._card.querySelector('.card__like').addEventListener('click', ()=> {
+    this._cardLike.addEventListener('click', ()=> {
       this._likeCard();
     });
 
@@ -54,7 +54,7 @@ export default class Card{
       this._deleteCard();
     });
 
-    this._card.querySelector('.card__img').addEventListener('click', () =>{
+    this._cardImage.addEventListener('click', () =>{
       this._openCardPopup();
     });
 
