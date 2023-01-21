@@ -20,7 +20,7 @@ import{
   formElements
 } from './variables.js';
 
-import Card from './Card.js';
+import Card from './Cardf.js';
 import FormValidator from './FormValidator.js';
 
 const popupFormTypePhotoValidate = new FormValidator(formElements, popupFormTypePhoto);
