@@ -5,7 +5,6 @@ export default class Card{
     this._title = data.name;
     this._description = data.name;
     this._selectorTemplate = selectorTemplate;
-
     this._handleOpenPopup = handleOpenPopup; //функция открытия попап
   }
 
