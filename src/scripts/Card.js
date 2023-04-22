@@ -1,11 +1,12 @@
 //этот модуль импортируем в модуль поверки валидации при правильном вводе данных и при начальной отрисовке
 export default class Card{
-  constructor (data, selectorTemplate, handleOpenPopup){
+  constructor (data, selectorTemplate, {handleCardClick}){
+    this._data = data;
     this._image = data.link;
     this._title = data.name;
     this._description = data.name;
     this._selectorTemplate = selectorTemplate;
-    this._handleOpenPopup = handleOpenPopup; //функция открытия попап
+    this._handleOpenPopup = handleCardClick; //функция открытия попап
   }
 
   //Приватный метод создания копии блока карточки
@@ -16,6 +17,7 @@ export default class Card{
 
   //Публичный метод генерации карточки
   generateCard(){
+    console.log(this._image);
     this._card = this._getTemplateCard();//получили карточку
     this._cardImage = this._card.querySelector('.card__img');
     this._cardLike = this._card.querySelector('.card__like');
@@ -41,7 +43,7 @@ export default class Card{
 
   // Приватный метод откртия попап с картинкой
   _openCardPopup(){
-    this._handleOpenPopup(this._title, this._image);
+    this._handleOpenPopup(this._data);
   }
 
   _setEventListener(){

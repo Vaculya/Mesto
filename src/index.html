@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Место</title>
-  <link rel="stylesheet" href="./pages/index.css">
+  <!-- <link rel="stylesheet" href="./pages/index.css"> -->
 </head>
 <body class="page">
   <header class="header">
@@ -12,8 +12,9 @@
   </header>
   <main class="main">
     <section class="profile">
-      <img class="profile__avatar" src="./images/profile/avatar.png" alt="Аватар">
+      <img class="profile__avatar" src="<%=require('./images/profile/avatar.png')%>" alt="Аватар">
       <div class="profile__info">
+
         <div class="profile__container">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
           <button class="profile__edit-btn" type="button"></button>
@@ -35,10 +36,10 @@
       <h2 class="popup__title">Редактировать профиль</h2>
       <form novalidate class="popup__form popup__form_type_edit" name="popup__profile" action="submit">
 
-        <input class="popup__input popup__input_info_name" id="name-input" name="popup__name" type="text" placeholder="Введите свое имя и фамилию" required minlength="2" maxlength="40">
+        <input class="popup__input popup__input_info_name" id="name-input" name="name" type="text" placeholder="Введите свое имя и фамилию" required minlength="2" maxlength="40">
         <span class="popup__input-error name-input-error"></span>
 
-        <input class="popup__input popup__input_info_about" id="about-input" name="popup__about" type="text" placeholder="О себе" required minlength="2" maxlength="200">
+        <input class="popup__input popup__input_info_about" id="about-input" name="about" type="text" placeholder="О себе" required minlength="2" maxlength="200">
         <span class="popup__input-error about-input-error"></span>
 
         <button class="popup__button" type="submit">Сохранить</button>
@@ -52,13 +53,13 @@
       <h2 class="popup__title">Новое место</h2>
       <form novalidate class="popup__form popup__form_type_add" name="popup__place" action="submit">
 
-        <input class="popup__input popup__input_place_name" id="place-input" name="popup__place" type="text" placeholder="Название" required minlength="2" maxlength="30">
+        <input class="popup__input popup__input_place_name" id="place-input" name="name" type="text" placeholder="Название" required minlength="2" maxlength="30">
         <span class="popup__input-error place-input-error"></span>
 
-        <input class="popup__input popup__input_img_link" id="link-input" name="popup__link" type="url" placeholder="Ссылка на картинку" required>
+        <input class="popup__input popup__input_img_link" id="link-input" name="link" type="url" placeholder="Ссылка на картинку" required>
         <span class="popup__input-error link-input-error"></span>
 
-        <button class="popup__button" type="submit">Создать</button>
+        <button class="popup__button" >Создать</button>
       </form>
     </div>
   </div>
@@ -84,6 +85,6 @@
     </div>
   </template>
   <!-- <script src="./scripts/validate.js"></script> -->
-  <script type="module" src="./scripts/index.js"></script>
+  <!-- <script type="module" src="./scripts/index.js"></script> -->
 </body>
 </html>
