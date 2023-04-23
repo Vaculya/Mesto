@@ -1,4 +1,4 @@
-import '../pages/index.css';
+import './index.css';
 import{
   elements,
   btnEditProfile,
@@ -20,15 +20,15 @@ import{
   initialCards,
   formElements,
   cardTemplate
-} from './variables.js';
+} from '../utils/variables.js';
 
-import Card from './Card.js';
-import FormValidator from './FormValidator.js';
-import Section from './Section.js';
-import Popup from './Popup.js';
-import PopupWithImage from './PopupWithImage.js';
-import PopupWithForm from './PopupWithForm.js';
-import UserInfo from './UserInfo.js';
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
+import Section from '../components/Section.js';
+import Popup from '../components/Popup.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
 
 // Валидацмя формы для фото
 const popupFormTypePhotoValidate = new FormValidator(formElements, popupFormTypePhoto);
@@ -38,37 +38,62 @@ popupFormTypePhotoValidate.enableValidation();
 const popupFormTypeEditValidate = new FormValidator(formElements, popupFormTypeEdit);
 popupFormTypeEditValidate.enableValidation();
 
+// '.popup_type_photo'
+const popupWithImageClassCreater = (selector) => {
+  const popupWithImageOpener = new PopupWithImage(selector);   //создание попапа и передача селектора
+  popupWithImageOpener.setEventListeners();
+  return popupWithImageOpener;
+};
+const popupWithImageClassCreated =  popupWithImageClassCreater('.popup_type_photo');
 
-// cardCreater - функция, которая принимает в качестве параметра данные одной карточки (напрмиер: cardItem1). Затем в ней создается экземпляр класса Card, где в конструторе (объект с данными карточки, селектор карточки, {функция открытия попапа}).
-// {функция открытия попапа} ниже
-//в функцию открытия попапа передается объект с данными карточки. Создается экземпляр открытия попапа кароточки. И функция открытия попапа с объектом с данными карточки.
-//карточка генерируется
+// const cardRender = (item) => {
+//   const newCard = cardCreater(item);
+//   card.addItem(newCard);
+// }
+
+
+//создает класс section, который используем в дальнейшем
+const classSection = (data) =>{
+  const createSection = new Section(
+    {
+      items : data,
+      // cardRender : (item) => {
+      //   const newCard = cardCreater(item);
+      //   card.addItem(newCard);
+      // }
+      // renderer : cardRender(item)
+      renderer : (item) => {
+        const newCard = cardCreater(item);
+        createSection.addItem(newCard);
+      }
+    }, elements
+  );
+  return createSection;
+};
 
 const cardCreater = (cardData) => {     //функция, которая создает карточки
   const card = new Card(                //вызов класса
     cardData,                           //откуда берем данные(начальный массив или данные с формы)
     '#card-template',                   // селктор карточки
     {handleCardClick : (cardData) => {  // функция, открытия попап с данными карточки, как аргумент
-      const popupWithImageOpener = new PopupWithImage('.popup_type_photo');   //создание попапа и передача селектора
-      popupWithImageOpener.open(cardData);                                    //откртие попапа
+      // const popupWithImageOpener = new PopupWithImage('.popup_type_photo');   //создание попапа и передача селектора
+      const popupWithImageReady = popupWithImageClassCreated;
+      popupWithImageReady.open(cardData);                                    //откртие попапа
+      // popupWithImageReady.setEventListeners();
     }});
   const cardGenerated = card.generateCard(); //генерация карточки
   return cardGenerated;
 };
 
-//Создание первой партии карточке
-//создается новая секция, тк она нужна для вставки на страницу
-//({  items: начльный массив данных,
-//    renderer - функция, котрая принимает аргумент item (один элемент массива), создается новая карточка  newCard = cardCreater(item), вставляем новую карточку через обращение к cardOnLoad.addItem(newCard)},
-//contanerSelector - куда вствить)
+// const cardOnLoad = new Section({      //вставка карточек из первой партии
+//   items : initialCards,               // начальные данные для загрузки первых карточек
+//   renderer : (item) => {              // отрисовка карточек (item - объект с именем и ссылка)
+//     const newCard = cardCreater(item);  //создание карточек с помощью cardCreater
+//     cardOnLoad.addItem(newCard);        // добавление карточки в верствку
+//   }
+// }, elements);                           // elements - куда вставить
 
-const cardOnLoad = new Section({      //вставка карточек из первой партии
-  items : initialCards,               // начальные данные для загрузки первых карточек
-  renderer : (item) => {              // отрисовка карточек (item - объект с именем и ссылка)
-    const newCard = cardCreater(item);  //создание карточек с помощью cardCreater
-    cardOnLoad.addItem(newCard);        // добавление карточки в верствку
-  }
-}, elements);                           // elements - куда вставить
+const cardOnLoad = classSection(initialCards);
 
 cardOnLoad.renderItem();                //создание карточки
 
@@ -79,13 +104,14 @@ const addPopup = new PopupWithForm(
   '.popup_type_add',
   {
     submitForm : (data) => {
-      const card = new Section({
-        items : data,
-        renderer : (item) => {
-          const newCard = cardCreater(item);
-          card.addItem(newCard);
-        }
-      }, elements);
+      // const card = new Section({
+      //   items : data,
+      //   renderer : (item) => {
+      //     const newCard = cardCreater(item);
+      //     card.addItem(newCard);
+      //   }
+      // }, elements);
+      const card = classSection(data);
       return card.renderItem();
     }
   }
@@ -94,6 +120,8 @@ const addPopup = new PopupWithForm(
 addPopup.setEventListeners();
 
 btnAddPlace.addEventListener('click', ()=>{
+  popupFormTypePhotoValidate.disabledBtn();
+  popupFormTypePhotoValidate.deleteErrors();
   addPopup.open();
 });
 
@@ -113,11 +141,17 @@ const popupProfile = new PopupWithForm(
 );
 popupProfile.setEventListeners();
 
-btnEditProfile.addEventListener('click', ()=>{
+const settingsOfOpenningProfilePopap = ()=>{
+  popupFormTypeEditValidate.disabledBtn();
+  popupFormTypeEditValidate.deleteErrors();
   const oldInfo = editorProfile.getUserInfo();
   nameProfileInput.value = oldInfo.name;
   infoProfileInput.value = oldInfo.about;
   console.log(oldInfo);
+}
+
+btnEditProfile.addEventListener('click', ()=>{
+  settingsOfOpenningProfilePopap();
   popupProfile.open();
 });
 

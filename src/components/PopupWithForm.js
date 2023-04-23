@@ -30,7 +30,7 @@ export default class PopupWithForm extends Popup{
     super.setEventListeners();
     this._form.addEventListener('submit', (event) => {      //при сабмит
       event.preventDefault();                               // сброс
-      this._submitForm(this._getInputValues());               // колбэк-функция сабмита формы с объектом this._formValues
+      this._submitForm(this._getInputValues());             // колбэк-функция сабмита формы с объектом this._formValues
       this.close();
     });
   }

@@ -9,7 +9,7 @@ export default class PopupWithImage extends Popup{
 
   open(item){
     super.open(); //копируем открытие из попап
-    super.setEventListeners(); //копируем слушателей закрытия по крестику и темной областиsetEventListeners
+    // super.setEventListeners(); //копируем слушателей закрытия по крестику и темной областиsetEventListeners
     this._popupPhoto.src = item.link; // вставляем ссылку на картинку из картинки в попап
     this._popupPhoto.alt = item.name; // вставляем имя на картинку из картинки в попап
     this._popupCaption.textContent = item.name; // вставляем имя на картинку из картинки в попап
