@@ -119,11 +119,13 @@ const addPopup = new PopupWithForm(
 
 addPopup.setEventListeners();
 
-btnAddPlace.addEventListener('click', ()=>{
+const settingsOfOpenningAddPopap =()=>{
   popupFormTypePhotoValidate.disabledBtn();
   popupFormTypePhotoValidate.deleteErrors();
   addPopup.open();
-});
+}
+
+btnAddPlace.addEventListener('click', settingsOfOpenningAddPopap);
 
 const editorProfile = new UserInfo({
   userName : '.profile__name',
@@ -147,13 +149,10 @@ const settingsOfOpenningProfilePopap = ()=>{
   const oldInfo = editorProfile.getUserInfo();
   nameProfileInput.value = oldInfo.name;
   infoProfileInput.value = oldInfo.about;
-  console.log(oldInfo);
+  popupProfile.open();
 }
 
-btnEditProfile.addEventListener('click', ()=>{
-  settingsOfOpenningProfilePopap();
-  popupProfile.open();
-});
+btnEditProfile.addEventListener('click', settingsOfOpenningProfilePopap);
 
 
 

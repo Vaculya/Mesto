@@ -6,7 +6,6 @@ export default class Popup {
   }
 
   _handleEscClose(){  //логика закрытия попапа клавишей Esc
-    console.log(event.key);
     if(event.key === 'Escape'){
       this.close();
     }
@@ -20,22 +19,16 @@ export default class Popup {
 
   open(){ // открыть попап
     this._popupSelector.classList.add('popup_opened');
-    document.addEventListener('keydown', (event)=> {
-      this._handleEscClose(event);
-    });
+    document.addEventListener('keydown', this._handleEscClose);
   }
 
   close(){ // закрыть попап
     this._popupSelector.classList.remove('popup_opened');
-    document.removeEventListener('keydown', (event) => {
-      this._handleEscClose(event);
-    });
+    document.removeEventListener('keydown',this._handleEscClose);
   }
 
   setEventListeners(){ //слушатель клика иконке закрытия.Popup также закрывается при клике на затемнённую область вокруг формы.
-    this._popupSelector.addEventListener('click', (event)=>{
-      this._handleOverlayClick(event);
-    });
+    this._popupSelector.addEventListener('click', this._handleOverlayClick);
   }
 }
 

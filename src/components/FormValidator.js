@@ -10,6 +10,11 @@ export default class FormValidator {
 
     this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector)); //все инпуты в нужной форме
     this._buttonForm = this._formElement.querySelector(this._submitButtonSelector); //кнопка в нужной форме
+
+    // this._checkInputValidity = this._checkInputValidity.bind(this);
+    // this._toggleButtonState = this._toggleButtonState.bind(this);
+
+    // this._inputElementListeners = this._inputElementListeners.bind(this);
   }
 
   //показать спан ошибки и подчерк красным инпут
@@ -53,12 +58,22 @@ export default class FormValidator {
     }
   }
 
+  // _inputElementListeners(inputElement){
+  //   console.log(this);
+  //   console.log(this._inputList);
+  //   console.log(inputElement);
+  //   this._checkInputValidity(inputElement);
+  //   this._toggleButtonState();
+  // }
+
   _setEventListeners(){
     this._toggleButtonState();
-    this._inputList.forEach((inputElement) => inputElement.addEventListener('input', () => {
+    this._inputList.forEach((inputElement) => inputElement.addEventListener('input',
+     () => {
       this._checkInputValidity(inputElement);
       this._toggleButtonState();
-    }));
+    }
+    ));
   }
 
   deleteErrors(){

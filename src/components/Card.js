@@ -7,6 +7,8 @@ export default class Card{
     this._description = data.name;
     this._selectorTemplate = selectorTemplate;
     this._handleOpenPopup = handleCardClick; //функция открытия попап
+    this._openCardPopup = this._openCardPopup.bind(this);
+    this._deleteCard = this._deleteCard.bind(this);
   }
 
   //Приватный метод создания копии блока карточки
@@ -32,11 +34,12 @@ export default class Card{
 
   //Приватный метод like готово
   _likeCard(){
-    this._cardLike.classList.toggle('card__like_active');
+    this.classList.toggle('card__like_active');
   }
 
   // Приватный метод удаления карточки
   _deleteCard(){
+    console.log(this);
     this._card.remove();
     this._card = null;
   }
@@ -46,18 +49,13 @@ export default class Card{
     this._handleOpenPopup(this._data);
   }
 
+
   _setEventListener(){
-    this._cardLike.addEventListener('click', ()=> {
-      this._likeCard();
-    });
+    this._cardLike.addEventListener('click', this._likeCard);
 
-    this._card.querySelector('.card__delete').addEventListener('click', () => {
-      this._deleteCard();
-    });
+    this._card.querySelector('.card__delete').addEventListener('click', this._deleteCard);
 
-    this._cardImage.addEventListener('click', () =>{
-      this._openCardPopup();
-    });
+    this._cardImage.addEventListener('click', this._openCardPopup);
 
   }
 }

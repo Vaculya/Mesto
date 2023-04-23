@@ -5,6 +5,9 @@ export default class PopupWithForm extends Popup{
     super(popupSelector);
     this._submitForm = submitForm;        //колбэк-функция сабмита формы
     this._form = this._popupSelector.querySelector('.popup__form');  //форма внутри попапа
+
+    this._formListener = this._formListener.bind(this);
+
   }
 
   _getInputValues(){      //получение значений инпута
@@ -13,7 +16,6 @@ export default class PopupWithForm extends Popup{
     this._formInputs.forEach(input => {       //запись значений инпут в объект this._formValues
       this._formValues[input.name] = input.value;
     });
-    console.log(this._formValues);
     return this._formValues;
   }
 
@@ -26,13 +28,17 @@ export default class PopupWithForm extends Popup{
     super.open();
   }
 
+  _formListener(){
+    console.log(this);
+    event.preventDefault();                               // сброс
+    this._submitForm(this._getInputValues());             // колбэк-функция сабмита формы с объектом this._formValues
+    this.close();
+  }
+
+  //ИСПРАВИТЬ addEventListener
   setEventListeners(){
     super.setEventListeners();
-    this._form.addEventListener('submit', (event) => {      //при сабмит
-      event.preventDefault();                               // сброс
-      this._submitForm(this._getInputValues());             // колбэк-функция сабмита формы с объектом this._formValues
-      this.close();
-    });
+    this._form.addEventListener('submit', this._formListener);
   }
 }
 
